@@ -2,12 +2,46 @@ import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Link, useNavigate } from "react-router-dom"
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { ChangeEvent, FormEvent, useState } from "react";
 
-
 export function Register() {
+
+    const passwordsDontMatchToast = () => toast.error("Passwords don't match", {
+      position: "top-right",
+      autoClose: 3500,
+      hideProgressBar: true,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: false,
+      progress: undefined,
+      theme: "colored",
+      });
+
+      const registerSuccessToast = () => toast.success("User registered successfully", {
+        position: "top-right",
+        autoClose: 3500,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "colored",
+        });
+
+        const registerErrorToast = () => toast.error("Username or email already in use", {
+          position: "top-right",
+          autoClose: 3500,
+          hideProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: "colored",
+          });
+
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -33,18 +67,22 @@ export function Register() {
     e.preventDefault();
 
     if (formData.password !== repeatPassword) { // 3. Validar se as senhas coincidem
-      alert("Passwords don't match");
+      // alert("Passwords don't match");
+      passwordsDontMatchToast();
       return;
     }
 
     try {
       const response = await axios.post('http://localhost:8080/auth/register', formData);
       console.log(response.data);
-      alert("User registered successfully");
-      navigate("/login");
+      // alert("User registered successfully");
+      registerSuccessToast();
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000);
     } catch (error) {
-      console.error('Error registering:', error);
-      alert("Username or Email already in use");
+      // alert("Username or Email already in use");
+      registerErrorToast();
     }
   };
 
@@ -79,6 +117,7 @@ export function Register() {
             <Link className="font-medium text-blue-600 hover:underline dark:text-blue-500" to={'/login'}>
               Login
             </Link>
+            <ToastContainer />
           </div>
         </form>
       </div>

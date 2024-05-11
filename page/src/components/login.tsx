@@ -4,8 +4,34 @@ import { Button } from "@/components/ui/button"
 import { Link, useNavigate } from "react-router-dom"
 import axios from 'axios';
 import { ChangeEvent, FormEvent, useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export function Login() {
+
+  const loginErrorToast = () => toast.error('Incorrect username or password', {
+    position: "top-right",
+    autoClose: 3500,
+    hideProgressBar: true,
+    closeOnClick: false,
+    pauseOnHover: true,
+    draggable: false,
+    progress: undefined,
+    theme: "colored",
+    });
+
+    const loginSuccessToast = () => toast.success('User logged in successfully', {
+      position: "top-right",
+      autoClose: 3500,
+      hideProgressBar: true,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: false,
+      progress: undefined,
+      theme: "colored",
+      });
+
+
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -28,11 +54,15 @@ export function Login() {
       console.log(response.data);
       document.cookie = `token=${response.data.token}; path=/;`;
       document.cookie = `username=${formData.username}; path=/;`;
-      alert("User logged in successfully");
-      navigate("/logged");
+      // alert("User logged in successfully");
+      loginSuccessToast();
+      setTimeout(() => {
+        navigate("/logged"); 
+      }, 1000);
     } catch (error) {
       console.error('Error logging in:', error);
-      alert("Incorrect username or password");
+      // alert("Incorrect username or password");
+      loginErrorToast();
     }
   };
 
@@ -59,6 +89,7 @@ export function Login() {
             <Link className="font-medium text-blue-600 hover:underline dark:text-blue-500" to={'/register'}>
               Register
             </Link>
+            <ToastContainer />
           </div>
         </form>
       </div>

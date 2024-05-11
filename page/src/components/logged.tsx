@@ -2,8 +2,22 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export function Logged() {
+
+  const logoutToast = () => toast.info('Logged out', {
+    position: "top-right",
+    autoClose: 3500,
+    hideProgressBar: true,
+    closeOnClick: false,
+    pauseOnHover: true,
+    draggable: false,
+    progress: undefined,
+    theme: "colored",
+    });
+
   const navigate = useNavigate();
   const [username, setUsername] = useState<string | null>(null); // Definir o tipo de estado como string | null
   const [isValidToken, setIsValidToken] = useState(false);
@@ -59,7 +73,6 @@ const getUsernameFromCookie = () => {
         }
       } catch (error) {
         setIsValidToken(false);
-        console.error("Erro ao verificar a validade do token:", error);
       }
     };
 
@@ -69,8 +82,11 @@ const getUsernameFromCookie = () => {
   const handleClick = () => {
     document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    alert("Logged out")
-    navigate("/login");
+    // alert("Logged out")
+    logoutToast();
+    setTimeout(() => {
+      navigate("/login");
+    }, 1000);
   };
 
   return (
@@ -81,6 +97,7 @@ const getUsernameFromCookie = () => {
           <Button className="mt-6" variant="default" onClick={handleClick}>
             Logout
           </Button>
+          <ToastContainer />
         </main>
       )}
     </>
