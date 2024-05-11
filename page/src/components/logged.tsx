@@ -8,7 +8,6 @@ export function Logged() {
   const [username, setUsername] = useState<string | null>(null); // Definir o tipo de estado como string | null
   const [isValidToken, setIsValidToken] = useState(false);
 
-  // Função para obter o token do cookie
   const getTokenFromCookie = () => {
     const cookieName = "token=";
     const decodedCookie = decodeURIComponent(document.cookie);
@@ -40,9 +39,9 @@ const getUsernameFromCookie = () => {
   useEffect(() => {
     const checkTokenValidity = async () => {
       try {
-        const token = getTokenFromCookie(); // Implemente esta função para obter o token do cookie
-        const username = getUsernameFromCookie(); // Implemente esta função para obter o token do cookie
-        setUsername(username); // Define o username obtido dos cookies
+        const token = getTokenFromCookie(); 
+        const username = getUsernameFromCookie(); 
+        setUsername(username); 
 
         if (token) {
           const response = await axios.get("http://localhost:8080/user", {
@@ -70,6 +69,7 @@ const getUsernameFromCookie = () => {
   const handleClick = () => {
     document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    alert("Logged out")
     navigate("/login");
   };
 
@@ -77,8 +77,8 @@ const getUsernameFromCookie = () => {
     <>
       {isValidToken && (
         <main key="1" className="flex h-screen w-full flex-col items-center justify-center bg-gray-100 dark:bg-gray-900">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100">LOGGED AS {username}</h1>
-          <Button className="mt-6 bg-gray-900 text-gray-100" variant="default" onClick={handleClick}>
+          <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-100">Logged in as {username}</h1>
+          <Button className="mt-6" variant="default" onClick={handleClick}>
             Logout
           </Button>
         </main>
