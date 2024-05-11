@@ -16,10 +16,10 @@ export function Register() {
     password: ''
   });
 
-  const [repeatPassword, setRepeatPassword] = useState(''); // 1. Estado separado para a senha repetida
+  const [repeatPassword, setRepeatPassword] = useState(''); 
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.id === 'repeatPassword') { // 2. Verifica se é o campo de senha repetida
+    if (e.target.id === 'repeatPassword') { 
       setRepeatPassword(e.target.value);
     } else {
       setFormData({
@@ -31,18 +31,20 @@ export function Register() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     if (formData.password !== repeatPassword) { // 3. Validar se as senhas coincidem
-      alert("As senhas não coincidem");
+      alert("Passwords don't match");
       return;
     }
+
     try {
       const response = await axios.post('http://localhost:8080/auth/register', formData);
       console.log(response.data);
-      alert("USUÁRIO REGISTRADO COM SUCESSO");
+      alert("User registered successfully");
       navigate("/login");
     } catch (error) {
       console.error('Error registering:', error);
-      alert("ERRO AO REGISTRAR USUÁRIO");
+      alert("Username or Email already in use");
     }
   };
 

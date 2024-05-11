@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../contexts/UserContext";
 import axios from "axios";
 
 export function Logged() {
   const navigate = useNavigate();
-  const { username } = useUser();
+  const [username, setUsername] = useState<string | null>(null); // Definir o tipo de estado como string | null
   const [isValidToken, setIsValidToken] = useState(false);
 
   // Função para obter o token do cookie
@@ -24,10 +23,27 @@ export function Logged() {
     return null; 
 };
 
+const getUsernameFromCookie = () => {
+  const cookieName = "username=";
+  const decodedCookie = decodeURIComponent(document.cookie);
+  const cookieArray = decodedCookie.split(';');
+
+  for (let i = 0; i < cookieArray.length; i++) {
+    const cookie = cookieArray[i].trim();
+    if (cookie.indexOf(cookieName) === 0) {
+      return cookie.substring(cookieName.length, cookie.length);
+    }
+  }
+  return null; 
+};
+
   useEffect(() => {
     const checkTokenValidity = async () => {
       try {
         const token = getTokenFromCookie(); // Implemente esta função para obter o token do cookie
+        const username = getUsernameFromCookie(); // Implemente esta função para obter o token do cookie
+        setUsername(username); // Define o username obtido dos cookies
+
         if (token) {
           const response = await axios.get("http://localhost:8080/user", {
             headers: {
@@ -52,7 +68,8 @@ export function Logged() {
   }, []);
 
   const handleClick = () => {
-    // Logout action
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     navigate("/login");
   };
 

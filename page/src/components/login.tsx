@@ -1,18 +1,12 @@
-
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Link, useNavigate } from "react-router-dom"
-
-import { useUser } from '../contexts/UserContext';
 import axios from 'axios';
 import { ChangeEvent, FormEvent, useState } from "react";
 
 export function Login() {
-
   const navigate = useNavigate();
-
-  const { setUsername } = useUser();
 
   const [formData, setFormData] = useState({
     username: '',
@@ -28,18 +22,17 @@ export function Login() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     try {
       const response = await axios.post('http://localhost:8080/auth/login', formData);
       console.log(response.data);
-
       document.cookie = `token=${response.data.token}; path=/;`;
-      
-      alert("USUÁRIO LOGADO COM SUCESSO");
-      setUsername(formData.username);
+      document.cookie = `username=${formData.username}; path=/;`;
+      alert("User logged in successfully");
       navigate("/logged");
     } catch (error) {
-      console.error('Error registering:', error);
-      alert("USUÁRIO OU SENHA INCORRETOS");
+      console.error('Error logging in:', error);
+      alert("Incorrect username or password");
     }
   };
 
