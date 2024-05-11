@@ -68,12 +68,15 @@ const getUsernameFromCookie = () => {
             setIsValidToken(true);
           } else {
             setIsValidToken(false);
+            navigate("/401"); 
           }
         } else {
           setIsValidToken(false);
+          navigate("/401"); 
         }
       } catch (error) {
         setIsValidToken(false);
+        navigate("/401"); 
       }
     };
 
