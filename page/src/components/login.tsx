@@ -6,6 +6,7 @@
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { Link } from "react-router-dom"
 
 export function Login() {
   return (
@@ -28,9 +29,9 @@ export function Login() {
           </Button>
           <div className="text-center text-sm text-gray-600 dark:text-gray-400">
             <span>Don't have an account? </span>
-            <a className="font-medium text-blue-600 hover:underline dark:text-blue-500" href="#">
+            <Link className="font-medium text-blue-600 hover:underline dark:text-blue-500" to={'/register'}>
               Register
-            </a>
+            </Link>
           </div>
         </form>
       </div>
