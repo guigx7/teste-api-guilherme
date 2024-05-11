@@ -1,13 +1,12 @@
-import { Login } from "./components/login"
-import { Register } from "./components/register"
+import {AppRoutes} from './routes'
 import "./styles/global.css"
 
 function App() {
 
   return (
-    <>
-      <Register />
-    </>
+    <div>
+      <AppRoutes />
+    </div>
   )
 }
 

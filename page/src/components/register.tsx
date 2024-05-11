@@ -30,6 +30,12 @@ export function Register() {
           <Button className="w-full" type="submit">
             Register
           </Button>
+          <div className="text-center text-sm text-gray-600 dark:text-gray-400">
+            <span>Already have an account? </span>
+            <a className="font-medium text-blue-600 hover:underline dark:text-blue-500" href="#">
+              Sign in
+            </a>
+          </div>
         </form>
       </div>
     </div>

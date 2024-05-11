@@ -26,6 +26,12 @@ export function Login() {
           <Button className="w-full" type="submit">
             Login
           </Button>
+          <div className="text-center text-sm text-gray-600 dark:text-gray-400">
+            <span>Don't have an account? </span>
+            <a className="font-medium text-blue-600 hover:underline dark:text-blue-500" href="#">
+              Register
+            </a>
+          </div>
         </form>
       </div>
     </div>
