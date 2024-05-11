@@ -6,6 +6,8 @@ import axios from 'axios';
 import { ChangeEvent, FormEvent, useState, useEffect } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Eye, EyeOff } from 'react-feather';
+
 
 export function Login() {
 
@@ -66,6 +68,20 @@ export function Login() {
     }
   };
 
+  const [passwordType, setPasswordType] = useState<'password' | 'text'>('password');
+  
+  const togglePasswordVisibility = (field: string) => {
+    const inputField = document.getElementById(field) as HTMLInputElement;
+    if (inputField.type === "password") {
+      inputField.type = "text";
+    } else {
+      inputField.type = "password";
+    }
+    if (field === "password") {
+      setPasswordType((prevType) => prevType === 'password' ? 'text' : 'password');
+    }
+  };
+
   useEffect(() => {
     document.title = "Teste Threeo - Login";
   })
@@ -83,7 +99,12 @@ export function Login() {
           </div>
           <div>
             <Label htmlFor="password">Password</Label>
-            <Input id="password" placeholder="Enter your password" required type="password" onChange={handleChange}/>
+            <div className="relative">
+              <Input id="password" placeholder="Enter your password" required type="password" onChange={handleChange}/>
+              <button type="button" className="absolute right-2 top-1/2 transform -translate-y-1/2" onClick={() => togglePasswordVisibility("password")}>
+                {passwordType === "password" ? <Eye size={20} style={{opacity: '0.5'}}/> : <EyeOff size={20} style={{opacity: '0.5'}}/>}
+              </button>
+            </div>
           </div>
           <Button className="w-full bg-[#19A25A] hover:bg-[#16884b]" type="submit">
             Login

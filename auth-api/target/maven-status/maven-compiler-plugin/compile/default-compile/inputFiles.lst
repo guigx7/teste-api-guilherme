@@ -1,0 +1,13 @@
+C:\Users\offguigx\Documents\teste\teste-threeo-guilherme\auth-api\src\main\java\br\com\api\authapi\controllers\AuthController.java
+C:\Users\offguigx\Documents\teste\teste-threeo-guilherme\auth-api\src\main\java\br\com\api\authapi\dto\ResponseDTO.java
+C:\Users\offguigx\Documents\teste\teste-threeo-guilherme\auth-api\src\main\java\br\com\api\authapi\infra\security\SecurityFilter.java
+C:\Users\offguigx\Documents\teste\teste-threeo-guilherme\auth-api\src\main\java\br\com\api\authapi\dto\RegisterRequestDTO.java
+C:\Users\offguigx\Documents\teste\teste-threeo-guilherme\auth-api\src\main\java\br\com\api\authapi\infra\security\TokenService.java
+C:\Users\offguigx\Documents\teste\teste-threeo-guilherme\auth-api\src\main\java\br\com\api\authapi\AuthApiApplication.java
+C:\Users\offguigx\Documents\teste\teste-threeo-guilherme\auth-api\src\main\java\br\com\api\authapi\repositories\UserRepository.java
+C:\Users\offguigx\Documents\teste\teste-threeo-guilherme\auth-api\src\main\java\br\com\api\authapi\infra\cors\CorsConfig.java
+C:\Users\offguigx\Documents\teste\teste-threeo-guilherme\auth-api\src\main\java\br\com\api\authapi\infra\security\CustomUserDetailsService.java
+C:\Users\offguigx\Documents\teste\teste-threeo-guilherme\auth-api\src\main\java\br\com\api\authapi\infra\security\SecurityConfig.java
+C:\Users\offguigx\Documents\teste\teste-threeo-guilherme\auth-api\src\main\java\br\com\api\authapi\controllers\UserController.java
+C:\Users\offguigx\Documents\teste\teste-threeo-guilherme\auth-api\src\main\java\br\com\api\authapi\domain\user\User.java
+C:\Users\offguigx\Documents\teste\teste-threeo-guilherme\auth-api\src\main\java\br\com\api\authapi\dto\LoginRequestDTO.java
