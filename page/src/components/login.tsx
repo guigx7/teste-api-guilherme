@@ -4,12 +4,15 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Link, useNavigate } from "react-router-dom"
 
+import { useUser } from '../contexts/UserContext';
 import axios from 'axios';
 import { ChangeEvent, FormEvent, useState } from "react";
 
 export function Login() {
 
   const navigate = useNavigate();
+
+  const { setUsername } = useUser();
 
   const [formData, setFormData] = useState({
     username: '',
@@ -29,6 +32,7 @@ export function Login() {
       const response = await axios.post('http://localhost:8080/auth/login', formData);
       console.log(response.data);
       alert("USUÁRIO LOGADO COM SUCESSO");
+      setUsername(formData.username);
       navigate("/logged");
     } catch (error) {
       console.error('Error registering:', error);
