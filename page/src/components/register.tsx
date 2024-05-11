@@ -8,7 +8,6 @@ import { ChangeEvent, FormEvent, useState } from "react";
 
 
 export function Register() {
-
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -17,28 +16,35 @@ export function Register() {
     password: ''
   });
 
+  const [repeatPassword, setRepeatPassword] = useState(''); // 1. Estado separado para a senha repetida
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.id]: e.target.value
-    });
+    if (e.target.id === 'repeatPassword') { // 2. Verifica se é o campo de senha repetida
+      setRepeatPassword(e.target.value);
+    } else {
+      setFormData({
+        ...formData,
+        [e.target.id]: e.target.value
+      });
+    }
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (formData.password !== repeatPassword) { // 3. Validar se as senhas coincidem
+      alert("As senhas não coincidem");
+      return;
+    }
     try {
       const response = await axios.post('http://localhost:8080/auth/register', formData);
       console.log(response.data);
       alert("USUÁRIO REGISTRADO COM SUCESSO");
       navigate("/login");
-
-
     } catch (error) {
       console.error('Error registering:', error);
       alert("ERRO AO REGISTRAR USUÁRIO");
     }
   };
-
 
   return (
     <div className="flex items-center justify-center min-h-[100dvh] px-4 py-12">
@@ -58,6 +64,10 @@ export function Register() {
           <div>
             <Label htmlFor="password">Password</Label>
             <Input id="password" placeholder="Enter your password" required type="password" onChange={handleChange}/>
+          </div>
+          <div>
+            <Label htmlFor="repeatPassword">Repeat Password</Label>
+            <Input id="repeatPassword" placeholder="Repeat your password" required type="password" onChange={handleChange}/>
           </div>
           <Button className="w-full" type="submit">
             Register
