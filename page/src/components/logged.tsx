@@ -51,6 +51,7 @@ const getUsernameFromCookie = () => {
 };
 
   useEffect(() => {
+    document.title = "Teste Threeo - Logged in";
     const checkTokenValidity = async () => {
       try {
         const token = getTokenFromCookie(); 

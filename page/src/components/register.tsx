@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState, useEffect } from "react";
 
 export function Register() {
 
@@ -85,6 +85,10 @@ export function Register() {
       registerErrorToast();
     }
   };
+
+  useEffect(() => {
+    document.title = "Teste Threeo - Register";
+  })
 
   return (
     <div className="flex items-center justify-center min-h-[100dvh] px-4 py-12">

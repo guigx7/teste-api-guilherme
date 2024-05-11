@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Link, useNavigate } from "react-router-dom"
 import axios from 'axios';
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState, useEffect } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -65,6 +65,10 @@ export function Login() {
       loginErrorToast();
     }
   };
+
+  useEffect(() => {
+    document.title = "Teste Threeo - Login";
+  })
 
   return (
     <div className="flex items-center justify-center min-h-[100dvh] px-4 py-12">
