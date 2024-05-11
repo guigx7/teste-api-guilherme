@@ -37,17 +37,28 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody RegisterRequestDTO body) {
-        Optional<User> user = this.repository.findByUsername(body.username());
-        if (user.isEmpty()){
-            User newUser = new User();
-            newUser.setPassword(passwordEncoder.encode(body.password()));
-            newUser.setUsername(body.username());
-            newUser.setEmail(body.email());
-            this.repository.save(newUser);
-            String token = this.tokenService.generateToken(newUser);
-            return ResponseEntity.ok(new ResponseDTO(newUser.getUsername(), token));
+
+
+        Optional<User> userUsername = repository.findByUsername(body.username());
+        if (userUsername.isPresent()) {
+            return ResponseEntity.badRequest().body("Username already in use");
         }
-        return ResponseEntity.badRequest().build();
+
+        Optional<User> userEmail = repository.findByEmail(body.email());
+        if (userEmail.isPresent()) {
+            return ResponseEntity.badRequest().body("Email already in use");
+        }
+
+
+        User newUser = new User();
+        newUser.setPassword(passwordEncoder.encode(body.password()));
+        newUser.setUsername(body.username());
+        newUser.setEmail(body.email());
+        this.repository.save(newUser);
+        String token = this.tokenService.generateToken(newUser);
+        return ResponseEntity.ok(new ResponseDTO(newUser.getUsername(), token));
+
+//        return ResponseEntity.badRequest().build();
     }
 
 

@@ -31,6 +31,9 @@ export function Login() {
     try {
       const response = await axios.post('http://localhost:8080/auth/login', formData);
       console.log(response.data);
+
+      document.cookie = `token=${response.data.token}; path=/;`;
+      
       alert("USUÁRIO LOGADO COM SUCESSO");
       setUsername(formData.username);
       navigate("/logged");
