@@ -1,8 +1,3 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/YQUhX5uYNSV
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -34,12 +29,13 @@ export function Register() {
     try {
       const response = await axios.post('http://localhost:8080/auth/register', formData);
       console.log(response.data);
-      alert("SUCCESS");
+      alert("USUÁRIO REGISTRADO COM SUCESSO");
       navigate("/login");
 
 
     } catch (error) {
       console.error('Error registering:', error);
+      alert("ERRO AO REGISTRAR USUÁRIO");
     }
   };
 
