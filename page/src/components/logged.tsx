@@ -95,7 +95,7 @@ const getUsernameFromCookie = () => {
       {isValidToken && (
         <main key="1" className="flex h-screen w-full flex-col items-center justify-center bg-gray-100 dark:bg-gray-900">
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-100">Logged in as {username}</h1>
-          <Button className="mt-6" variant="default" onClick={handleClick}>
+          <Button className="mt-6 bg-[#19A25A] hover:bg-[#16884b]" variant="default" onClick={handleClick}>
             Logout
           </Button>
           <ToastContainer />

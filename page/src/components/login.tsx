@@ -85,12 +85,12 @@ export function Login() {
             <Label htmlFor="password">Password</Label>
             <Input id="password" placeholder="Enter your password" required type="password" onChange={handleChange}/>
           </div>
-          <Button className="w-full" type="submit">
+          <Button className="w-full bg-[#19A25A] hover:bg-[#16884b]" type="submit">
             Login
           </Button>
           <div className="text-center text-sm text-gray-600 dark:text-gray-400">
             <span>Don't have an account? </span>
-            <Link className="font-medium text-blue-600 hover:underline dark:text-blue-500" to={'/register'}>
+            <Link className="font-medium text-[#19A25A] hover:text-[#16884b hover:underline dark:text-blue-500" to={'/register'}>
               Register
             </Link>
             <ToastContainer />
