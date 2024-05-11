@@ -6,6 +6,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { ChangeEvent, FormEvent, useState, useEffect } from "react";
+import { Eye, EyeOff } from 'react-feather';
+
 
 export function Register() {
 
@@ -41,6 +43,17 @@ export function Register() {
           progress: undefined,
           theme: "colored",
           });
+
+          const invalidEmailToast = () => toast.error("Invalid email", {
+            position: "top-right",
+            autoClose: 3500,
+            hideProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+            theme: "colored",
+            });
 
   const navigate = useNavigate();
 
@@ -86,6 +99,23 @@ export function Register() {
     }
   };
 
+  const [passwordType, setPasswordType] = useState<'password' | 'text'>('password');
+  const [repeatPasswordType, setRepeatPasswordType] = useState<'password' | 'text'>('password');
+  
+  const togglePasswordVisibility = (field: string) => {
+    const inputField = document.getElementById(field) as HTMLInputElement;
+    if (inputField.type === "password") {
+      inputField.type = "text";
+    } else {
+      inputField.type = "password";
+    }
+    if (field === "password") {
+      setPasswordType((prevType) => prevType === 'password' ? 'text' : 'password');
+    } else if (field === "repeatPassword") {
+      setRepeatPasswordType((prevType) => prevType === 'password' ? 'text' : 'password');
+    }
+  };
+
   useEffect(() => {
     document.title = "Teste Threeo - Register";
   })
@@ -103,15 +133,25 @@ export function Register() {
           </div>
           <div>
             <Label htmlFor="email">Email</Label>
-            <Input id="email" placeholder="Enter your email" required type="email" onChange={handleChange}/>
+            <Input id="email" placeholder="Enter your email" required type="email" onChange={handleChange} onInvalid={() => invalidEmailToast()} />
           </div>
           <div>
             <Label htmlFor="password">Password</Label>
-            <Input id="password" placeholder="Enter your password" required type="password" onChange={handleChange}/>
+            <div className="relative">
+              <Input id="password" placeholder="Enter your password" required type="password" onChange={handleChange}/>
+              <button type="button" className="absolute right-2 top-1/2 transform -translate-y-1/2" onClick={() => togglePasswordVisibility("password")}>
+                {passwordType === "password" ? <Eye size={20} style={{opacity: '0.5'}}/> : <EyeOff size={20} style={{opacity: '0.5'}}/>}
+              </button>
+            </div>
           </div>
           <div>
-            <Label htmlFor="repeatPassword">Repeat Password</Label>
-            <Input id="repeatPassword" placeholder="Repeat your password" required type="password" onChange={handleChange}/>
+            <Label htmlFor="repeatPassword">Confirm Password</Label>
+            <div className="relative">
+              <Input id="repeatPassword" placeholder="Confirm your password" required type="password" onChange={handleChange}/>
+              <button type="button" className="absolute right-2 top-1/2 transform -translate-y-1/2" onClick={() => togglePasswordVisibility("repeatPassword")}>
+                {repeatPasswordType === "password" ? <Eye size={20} style={{opacity: '0.5'}}/> : <EyeOff size={20} style={{opacity: '0.5'}}/>}
+              </button>
+            </div>
           </div>
           <Button className="w-full bg-[#19A25A] hover:bg-[#16884b]" type="submit">
             Register
