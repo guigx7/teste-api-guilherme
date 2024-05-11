@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>br.com.api</groupId>
 	<artifactId>auth-api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>auth-api</name>
 	<description>Login / Register API</description>
 	<properties>
