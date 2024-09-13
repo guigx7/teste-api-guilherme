@@ -1,4 +1,4 @@
-# Teste Threeo - Guilherme Abdelnor Tavares
+# Teste API - Guilherme Abdelnor Tavares
 
 Este projeto consiste em uma API desenvolvida em Java utilizando o framework Spring Boot, integrada com um front-end em ReactJS. A API é construída com as dependências Data JPA, Security, Web e Lombok, e utiliza o banco de dados em memória H2 DataBase. A autenticação é realizada por meio de Token JWT.
 
